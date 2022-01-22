@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wall -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -DROOT_PROJ_DIR='"/mnt/c/Users/Ze Carvalho/Desktop/FEUP/Programacao/Prog-SVG-PGN-converter/data"' -g   CMakeFiles/xmltest.dir/programs/xmltest.cpp.o  -o xmltest  libtinyxml2.a 

@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wall -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -DROOT_PROJ_DIR='"/mnt/c/Users/Ze Carvalho/Desktop/FEUP/Programacao/Prog-SVG-PGN-converter/data"' -g   CMakeFiles/test_polygon.dir/test/test_polygon.cpp.o  -o test_polygon  libsvg.a libtinyxml2.a lib/libgtestd.a lib/libgtest_maind.a -lpthread lib/libgtestd.a -lpthread 
