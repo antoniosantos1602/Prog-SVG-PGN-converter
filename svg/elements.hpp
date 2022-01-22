@@ -17,6 +17,13 @@ namespace svg {
         void rotate(const point &origin, int v) override;
         shape *duplicate() const override;
     };
-
+    class circle : public shape {
+    protected:
+        point center;
+        point radius;
+    public:
+        circle(const svg::color &fill, const point &center, const point &radius);
+        void draw(png_image &img) const override;
+    };
 }
 #endif

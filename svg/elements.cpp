@@ -26,4 +26,12 @@ namespace svg {
         return new ellipse(get_color(), center, radius);
     }
 
+    circle::circle(const color &fill, const point &center, const int &r) : shape(fill),center(center) {
+        this->radius = new point(r,r);
+
+    }
+
+    void circle::draw(png_image &img) const {
+
+    }
 }
