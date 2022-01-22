@@ -1,6 +1,7 @@
 #include "elements.hpp"
 
 namespace svg {
+    //Ellipse begin-----------------
     ellipse::ellipse(const svg::color &fill,
                      const point &center,
                      const point &radius) :
@@ -25,13 +26,11 @@ namespace svg {
     shape *ellipse::duplicate() const {
         return new ellipse(get_color(), center, radius);
     }
+    //Ellipse End-----------------
 
-    circle::circle(const color &fill, const point &center, const int &r) : shape(fill),center(center) {
-        this->radius = new point(r,r);
+    //Circle Begin-----------------
+    circle::circle(const svg::color &fill, const point &center, const int &radius) : ellipse(fill,center,{radius,radius}) {}
+    //Circle End-----------------
 
-    }
 
-    void circle::draw(png_image &img) const {
-
-    }
 }
