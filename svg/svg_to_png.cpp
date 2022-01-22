@@ -104,6 +104,42 @@ namespace svg {
         color fill = parse_color(elem->Attribute("fill"));
         return new circle(fill,{cx,cy},r);
     }
+
+    std::vector<std::string> splitString(std::string s,const std::string& delimiter) {
+        std::vector<std::string> splitString;
+        size_t pos = 0;
+        std::string token;
+        while ((pos = s.find(delimiter)) != std::string::npos) {
+            token = s.substr(0, pos);
+            splitString.push_back(token);
+            s.erase(0, pos + delimiter.length());
+        }
+        splitString.push_back(s);
+        return splitString;
+    };
+
+
+    std::vector<point> getPoints(const char *pointsChar) {
+        std::vector<point> pointsOut;
+        std::vector<std::string> s = splitString(*new std::string(pointsChar)," ");
+        for(auto elem : s){
+            size_t separator = elem.find(',');
+            /*
+            std::cout << elem.substr(0,separator) << " ";
+            std::cout << elem.substr(separator+1,elem.size()-1) << std::endl;
+             */
+            pointsOut.push_back({stoi(elem.substr(0,separator)),stoi(elem.substr(separator+1,elem.size()-1))});
+        }
+        return pointsOut;
+    }
+
+    polyline *parse_polyline(XMLElement *elem){
+        std::vector<point> points = getPoints(elem->Attribute("points"));
+        color color = parse_color(elem->Attribute("fill"));
+        return new polyline(points,color);
+    }
+
+
     // TODO other parsing functions for elements
 
     // Loop for parsing shapes
@@ -120,6 +156,9 @@ namespace svg {
             }
             else if(type == "circle"){
                 s = parse_circle(child_elem);
+            }
+            else if(type == "polyline"){
+                s = parse_polyline(child_elem);
             }
             else {
                 std::cout << "Unrecognized shape type: " << type << std::endl;

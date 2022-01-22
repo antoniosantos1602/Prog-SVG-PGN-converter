@@ -20,10 +20,16 @@ namespace svg {
 
 
     class circle : public ellipse {
-    protected:
-        point center;
     public:
         circle(const svg::color &fill, const point &center, const int &radius);
+    };
+
+    class polyline : public shape {
+    protected:
+        std::vector<point> points;
+    public:
+        polyline(const std::vector<point> &points,const color &color);
+        void draw(png_image &img) const override;
     };
 }
 #endif

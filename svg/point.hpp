@@ -2,7 +2,7 @@
 #ifndef __coord2d_hpp__
 #define __coord2d_hpp__
 #include <cmath>
-
+#include <ostream>
 namespace svg {
     //! 2D Point.
     struct point {
@@ -38,6 +38,11 @@ namespace svg {
             return { origin.x + (x - origin.x) * v,
                      origin.y + (y - origin.y) * v };
         }
+        friend std::ostream& operator<<(std::ostream& os, const point& o){
+            os << "x: " << o.x << "y: " << o.y;
+            return os;
+        }
+
     };
 
 }
