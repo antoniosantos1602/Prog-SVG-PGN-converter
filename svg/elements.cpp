@@ -53,13 +53,13 @@ namespace svg {
 
     void polyline::scale(const point &origin, int v) {
         for(auto &point : points){
-            point.scale(origin,v);
+            point = point.scale(origin,v);
         }
     }
 
     void polyline::rotate(const point &center, int degrees) {
         for(auto &point : points){
-            point.rotate(center,degrees);
+            point = point.rotate(center,degrees);
         }
     }
     //Polyline End-----------------
