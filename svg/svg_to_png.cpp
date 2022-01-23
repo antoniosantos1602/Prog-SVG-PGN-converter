@@ -153,7 +153,9 @@ namespace svg {
 
     polygon *parse_rect(XMLElement *elem){
         point point1 = { elem->IntAttribute("x"),elem->IntAttribute("y")};
-        point point2 = { elem->IntAttribute("width")+point1.x,elem->IntAttribute("height")+point1.y};
+        point point2 = { elem->IntAttribute("width")+point1.x-1,elem->IntAttribute("height")+point1.y-1};
+        std::cout << point1 << std::endl;
+        std::cout << point2 << std::endl;
         std::vector<point> points;
         points.push_back(point1);
         points.push_back(point2);
