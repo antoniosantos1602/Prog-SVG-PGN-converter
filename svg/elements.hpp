@@ -4,6 +4,10 @@
 
 #include "shape.hpp"
 
+#include <iostream>
+#include <tinyxml2.h>
+#include <sstream>
+
 namespace svg {
     class ellipse : public shape {
     protected:
@@ -58,6 +62,18 @@ namespace svg {
     class rect : public polygon{
     public:
         rect(const std::vector<point> &points,const color &fill);
+    };
+    ///todo  em libertar estas no destructor do grupo.
+    class group : public shape{
+    private:
+        std::vector<shape * > shapes;
+    public:
+        group(const std::vector<shape *>& vector,const color &fill);
+
+        //void translate(const point &t) override;
+       // void transformOrigin(const point &t) override;
+        //void scale(const point &origin, int v) override;
+        void draw() const override;
     };
 }
 #endif

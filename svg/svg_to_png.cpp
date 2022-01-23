@@ -203,6 +203,13 @@ namespace svg {
         
     }
 
+    group *parse_group(XMLElement *elem){
+      std::vector<shape *> shapes;
+        for (auto child_elem = elem->FirstChildElement();child_elem != NULL;child_elem = child_elem->NextSiblingElement()) {
+
+        }
+        return new group(shapes);
+    }
 
     // TODO other parsing functions for elements
 
@@ -232,8 +239,11 @@ namespace svg {
             else if(type == "rect"){
                 s = parse_rect(child_elem);
             }
-            else if(type == "use"){
+            else if(type == "use") {
                 s = parse_use(child_elem);
+            }
+            else if(type == "g"){
+                s = parse_group(child_elem);
             }
             else {
                 std::cout << "Unrecognized shape type: " << type << std::endl;

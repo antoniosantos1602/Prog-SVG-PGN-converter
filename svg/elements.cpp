@@ -108,4 +108,6 @@ namespace svg {
     rect::rect(const std::vector<point> &points, const color &fill) : polygon(points,fill) {}
     //Rect End-----------------
 
+    group::group(const std::vector<shape *>& vector,const color &fill) : shape(fill){
+    }
 }
