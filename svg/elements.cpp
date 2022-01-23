@@ -109,5 +109,6 @@ namespace svg {
     //Rect End-----------------
 
     group::group(const std::vector<shape *>& vector,const color &fill) : shape(fill){
+
     }
 }
