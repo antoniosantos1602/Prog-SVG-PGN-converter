@@ -208,7 +208,7 @@ namespace svg {
         for (auto child_elem = elem->FirstChildElement();child_elem != NULL;child_elem = child_elem->NextSiblingElement()) {
 
         }
-        return new group(shapes);
+        return new group(shapes,parse_color("red"));
     }
 
     // TODO other parsing functions for elements
