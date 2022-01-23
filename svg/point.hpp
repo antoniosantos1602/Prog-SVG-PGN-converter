@@ -38,10 +38,12 @@ namespace svg {
             return { origin.x + (x - origin.x) * v,
                      origin.y + (y - origin.y) * v };
         }
+        //TODO remove after finishing coding, only exists for debugging
         friend std::ostream& operator<<(std::ostream& os, const point& o){
             os << "x: " << o.x << "y: " << o.y;
             return os;
         }
+
 
     };
 

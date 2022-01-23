@@ -36,9 +36,6 @@ namespace svg {
     //Polyline Begin-----------------
     polyline::polyline(const std::vector<point> &points, const color &color) : shape(color){
         this->points = points;
-        for(auto elem : points){
-            std::cout << elem << std::endl;
-        }
     }
 
     void polyline::draw(png_image &img) const{
@@ -46,7 +43,28 @@ namespace svg {
             img.draw_line(points.at(i),points.at(i+1),get_color());
         }
     }
+
+    void polyline::translate(const point &t) {
+        for(auto &point : points){
+           point.x += t.x;
+           point.y += t.y;
+        }
+    }
+
+    void polyline::scale(const point &origin, int v) {
+        for(auto &point : points){
+            point.scale(origin,v);
+        }
+    }
+
+    void polyline::rotate(const point &center, int degrees) {
+        for(auto &point : points){
+            point.rotate(center,degrees);
+        }
+    }
     //Polyline End-----------------
 
-
+    //line Begin-----------------
+    line::line(const std::vector<point> &points, const color &color) : polyline(points,color) {}
+    //line End-----------------
 }

@@ -30,6 +30,14 @@ namespace svg {
     public:
         polyline(const std::vector<point> &points,const color &color);
         void draw(png_image &img) const override;
+        void translate(const point &t) override;
+        void rotate(const point &center, int degrees) override;
+        void scale(const point &origin, int v) override;
+    };
+
+    class line : public polyline{
+    public:
+        line(const std::vector<point> &points,const color &color);
     };
 }
 #endif

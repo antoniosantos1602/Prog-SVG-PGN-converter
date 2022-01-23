@@ -135,6 +135,16 @@ namespace svg {
         return new polyline(points,color);
     }
 
+    polyline *parse_line(XMLElement *elem){
+        point point1 = { elem->IntAttribute("x1"),elem->IntAttribute("y1")};
+        point point2 = { elem->IntAttribute("x2"),elem->IntAttribute("y2")};
+        std::vector<point> points;
+        points.push_back(point1);
+        points.push_back(point2);
+        color color = parse_color(elem->Attribute("stroke"));
+        return new line(points,color);
+    }
+
 
     // TODO other parsing functions for elements
 
@@ -148,13 +158,15 @@ namespace svg {
             // TODO complete
             if (type == "ellipse") {
                 s = parse_ellipse(child_elem);
-
             }
             else if(type == "circle"){
                 s = parse_circle(child_elem);
             }
             else if(type == "polyline"){
                 s = parse_polyline(child_elem);
+            }
+            else if(type == "line"){
+                s = parse_line(child_elem);
             }
             else {
                 std::cout << "Unrecognized shape type: " << type << std::endl;
