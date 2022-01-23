@@ -44,7 +44,16 @@ namespace svg {
     protected:
         std::vector<point> points;
     public:
+        polygon(const std::vector<point> &points,const color &fill);
+        void draw(png_image &img) const override;
+        void translate(const point &t) override;
+        void rotate(const point &center, int degrees) override;
+        void scale(const point &origin, int v) override;
+    };
 
+    class rect : public polygon{
+    public:
+        rect(const std::vector<point> &points,const color &fill);
     };
 }
 #endif

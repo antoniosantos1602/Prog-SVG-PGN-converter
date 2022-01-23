@@ -67,4 +67,39 @@ namespace svg {
     //line Begin-----------------
     line::line(const std::vector<point> &points, const color &color) : polyline(points,color) {}
     //line End-----------------
+
+
+    //Polygon Begin-----------------
+    polygon::polygon(const std::vector<point> &points, const color &fill) : shape(fill) {
+        this->points = points;
+    }
+
+    void polygon::draw(png_image &img) const {
+        img.draw_polygon(points,get_color());
+    }
+
+    void polygon::rotate(const point &center, int degrees) {
+        for(auto &point : points){
+            point = point.rotate(center,degrees);
+        }
+    }
+
+    void polygon::translate(const point &t) {
+        for(auto &point : points){
+            point.x += t.x;
+            point.y += t.y;
+        }
+    }
+
+    void polygon::scale(const point &origin, int v) {
+        for(auto &point : points){
+            point = point.scale(origin,v);
+        }
+    }
+    //Polygon End-----------------
+
+    //Rect Begin-----------------
+    rect::rect(const std::vector<point> &points, const color &fill) : polygon(points,fill) {}
+    //Rect End-----------------
+
 }

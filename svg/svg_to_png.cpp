@@ -145,6 +145,22 @@ namespace svg {
         return new line(points,color);
     }
 
+    polygon *parse_polygon(XMLElement *elem){
+        std::vector<point> points = getPoints(elem->Attribute("points"));
+        color color = parse_color(elem->Attribute("fill"));
+        return new polygon(points,color);
+    }
+
+    polygon *parse_rect(XMLElement *elem){
+        point point1 = { elem->IntAttribute("x"),elem->IntAttribute("y")};
+        point point2 = { elem->IntAttribute("width")+point1.x,elem->IntAttribute("height")+point1.y};
+        std::vector<point> points;
+        points.push_back(point1);
+        points.push_back(point2);
+        color color = parse_color(elem->Attribute("fill"));
+        return new rect(points,color);
+    }
+
 
     // TODO other parsing functions for elements
 
@@ -167,6 +183,12 @@ namespace svg {
             }
             else if(type == "line"){
                 s = parse_line(child_elem);
+            }
+            else if(type == "polygon"){
+                s = parse_polygon(child_elem);
+            }
+            else if(type == "rect"){
+                s = parse_rect(child_elem);
             }
             else {
                 std::cout << "Unrecognized shape type: " << type << std::endl;
