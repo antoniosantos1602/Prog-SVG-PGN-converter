@@ -18,6 +18,8 @@ namespace svg {
             {"yellow", {255, 255, 0}}
     };
 
+    std::map<std::string, shape> idMap;
+
     color parse_color(const std::string &str) {
         color c;
         char first_ch = str.at(0);
@@ -88,7 +90,7 @@ namespace svg {
     }
 
     void parse_id(const std::string &id,const shape &obj){
-
+        idMap.insert(std::pair<std::string,shape>(id,obj));
     }
 
     // Shape parsing
@@ -99,7 +101,7 @@ namespace svg {
         int ry = elem->IntAttribute("ry");
         color fill = parse_color(elem->Attribute("fill"));
         auto *output = new ellipse(fill, {cx, cy}, {rx, ry});
-        XMLError id = elem->QueryStringAttribute("id", nullptr);
+        XMLError id = elem->QueryAttribute("id", (bool *) "");
         if(id != tinyxml2::XML_NO_ATTRIBUTE){
             parse_id(elem->Attribute("id"),*output->duplicate());
         }
@@ -112,7 +114,7 @@ namespace svg {
         int r = elem->IntAttribute("r");
         color fill = parse_color(elem->Attribute("fill"));
         auto *output = new circle(fill,{cx,cy},r);
-        XMLError id = elem->QueryStringAttribute("id", nullptr);
+        XMLError id = elem->QueryAttribute("id", (bool *) "");
         if(id != tinyxml2::XML_NO_ATTRIBUTE){
             parse_id(elem->Attribute("id"),*output->duplicate());
         }
@@ -147,7 +149,7 @@ namespace svg {
         std::vector<point> points = getPoints(elem->Attribute("points"));
         color color = parse_color(elem->Attribute("stroke"));
         auto *output = new polyline(points,color);
-        XMLError id = elem->QueryStringAttribute("id", nullptr);
+        XMLError id = elem->QueryAttribute("id", (bool *) "");
         if(id != tinyxml2::XML_NO_ATTRIBUTE){
             parse_id(elem->Attribute("id"),*output->duplicate());
         }
@@ -162,7 +164,7 @@ namespace svg {
         points.push_back(point2);
         color color = parse_color(elem->Attribute("stroke"));
         auto *output = new line(points,color);
-        XMLError id = elem->QueryStringAttribute("id", nullptr);
+        XMLError id = elem->QueryAttribute("id", (bool *) "");
         if(id != tinyxml2::XML_NO_ATTRIBUTE){
             parse_id(elem->Attribute("id"),*output->duplicate());
         }
@@ -173,7 +175,7 @@ namespace svg {
         std::vector<point> points = getPoints(elem->Attribute("points"));
         color color = parse_color(elem->Attribute("fill"));
         auto *output = new polygon(points,color);
-        XMLError id = elem->QueryStringAttribute("id", nullptr);
+        XMLError id = elem->QueryAttribute("id", (bool *) "");
         if(id != tinyxml2::XML_NO_ATTRIBUTE){
             parse_id(elem->Attribute("id"),*output->duplicate());
         }
@@ -190,11 +192,15 @@ namespace svg {
         points.push_back(point2);
         color color = parse_color(elem->Attribute("fill"));
         auto *output = new rect(points,color);
-        XMLError id = elem->QueryStringAttribute("id", nullptr);
+        XMLError id = elem->QueryAttribute("id", (bool *) "");
         if(id != tinyxml2::XML_NO_ATTRIBUTE){
             parse_id(elem->Attribute("id"),*output->duplicate());
         }
         return output;
+    }
+
+    shape *parse_use(XMLElement *elem){
+        
     }
 
 
@@ -225,6 +231,9 @@ namespace svg {
             }
             else if(type == "rect"){
                 s = parse_rect(child_elem);
+            }
+            else if(type == "use"){
+                s = parse_use(child_elem);
             }
             else {
                 std::cout << "Unrecognized shape type: " << type << std::endl;

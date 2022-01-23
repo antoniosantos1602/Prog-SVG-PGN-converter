@@ -62,6 +62,9 @@ namespace svg {
             point = point.rotate(center,degrees);
         }
     }
+    shape *polyline::duplicate() const {
+        return new polyline(points,get_color());
+    }
     //Polyline End-----------------
 
     //line Begin-----------------
@@ -95,6 +98,9 @@ namespace svg {
         for(auto &point : points){
             point = point.scale(origin,v);
         }
+    }
+    shape *polygon::duplicate() const {
+        return new polygon(points,get_color());
     }
     //Polygon End-----------------
 

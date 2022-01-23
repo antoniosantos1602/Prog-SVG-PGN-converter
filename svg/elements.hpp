@@ -33,6 +33,8 @@ namespace svg {
         void translate(const point &t) override;
         void rotate(const point &center, int degrees) override;
         void scale(const point &origin, int v) override;
+
+        shape *duplicate() const;
     };
 
     class line : public polyline{
@@ -49,6 +51,8 @@ namespace svg {
         void translate(const point &t) override;
         void rotate(const point &center, int degrees) override;
         void scale(const point &origin, int v) override;
+
+        shape *duplicate() const;
     };
 
     class rect : public polygon{
