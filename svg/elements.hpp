@@ -39,5 +39,12 @@ namespace svg {
     public:
         line(const std::vector<point> &points,const color &color);
     };
+
+    class polygon : public shape{
+    protected:
+        std::vector<point> points;
+    public:
+
+    };
 }
 #endif

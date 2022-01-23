@@ -121,7 +121,7 @@ namespace svg {
 
     std::vector<point> getPoints(const char *pointsChar) {
         std::vector<point> pointsOut;
-        std::vector<std::string> s = splitString(*new std::string(pointsChar)," ");
+        std::vector<std::string> s = splitString(std::string(pointsChar)," ");
         for(auto elem : s){
             size_t separator = elem.find(',');
             pointsOut.push_back({stoi(elem.substr(0,separator)),stoi(elem.substr(separator+1,elem.size()-1))});
