@@ -124,10 +124,6 @@ namespace svg {
         std::vector<std::string> s = splitString(*new std::string(pointsChar)," ");
         for(auto elem : s){
             size_t separator = elem.find(',');
-            /*
-            std::cout << elem.substr(0,separator) << " ";
-            std::cout << elem.substr(separator+1,elem.size()-1) << std::endl;
-             */
             pointsOut.push_back({stoi(elem.substr(0,separator)),stoi(elem.substr(separator+1,elem.size()-1))});
         }
         return pointsOut;
@@ -135,7 +131,7 @@ namespace svg {
 
     polyline *parse_polyline(XMLElement *elem){
         std::vector<point> points = getPoints(elem->Attribute("points"));
-        color color = parse_color(elem->Attribute("fill"));
+        color color = parse_color(elem->Attribute("stroke"));
         return new polyline(points,color);
     }
 

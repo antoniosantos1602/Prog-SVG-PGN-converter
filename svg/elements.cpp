@@ -42,7 +42,7 @@ namespace svg {
     }
 
     void polyline::draw(png_image &img) const{
-        for(size_t i = 0; i < points.size(); i+=2){
+        for(size_t i = 0; i < points.size()-1; i++){
             img.draw_line(points.at(i),points.at(i+1),get_color());
         }
     }
